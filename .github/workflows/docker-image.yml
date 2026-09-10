@@ -48,6 +48,8 @@ jobs:
             .
 
     - name: Push Docker image
+      env:
+         NEW_VERSION: ${{ steps.version.outputs.version }} 
       run: |
           docker push dymsjims/graphql:$NEW_VERSION
           docker push dymsjims/graphql:latest
