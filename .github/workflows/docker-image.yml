@@ -30,7 +30,7 @@ jobs:
       env:
         DOCKER_USER: ${{ secrets.DOCKER_USER }}
         DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
-        NEW_VERSION: ${{ steps.version.outputs.version }} 
+       
         
       run: |
         docker login -u $DOCKER_USER -p $DOCKER_PASSWORD 
@@ -40,17 +40,19 @@ jobs:
     
     
         
-    # - name: Build Docker Image
-    #   run: |
-    #       docker build \
-    #         -t dymsjims/graphql:0.0.2 \
-    #         -t dymsjims/graphql:latest \
-    #         .
+    - name: Build Docker Image
+      env:
+         NEW_VERSION: ${{ steps.version.outputs.version }} 
+      run: |
+          docker build \
+            -t dymsjims/graphql:$NEW_VERSION\
+            -t dymsjims/graphql:latest \
+            .
 
-    # - name: Push Docker image
-    #   run: |
-    #       docker push dymsjims/graphql:0.0.2
-    #       docker push dymsjims/graphql:latest
+    - name: Push Docker image
+      run: |
+          docker push dymsjims/$NEW_VERSION
+          docker push dymsjims/graphql:latest
         
       
     
