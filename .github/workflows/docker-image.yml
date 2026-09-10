@@ -27,16 +27,17 @@ jobs:
     
     
         
-    - name: build Docker Image
-      run: 
-        docker build -t dymsjims/graphql:0.0.2 . 
-        docker build -t dymsjims/graphql:latest . 
+    - name: Build Docker Image
+      run: |
+          docker build \
+            -t dymsjims/graphql:0.0.2 \
+            -t dymsjims/graphql:latest \
+            .
 
-    - name: Push Docker image 
-      run: 
-        docker push  dymsjims/graphql:0.0.2 
-        docker push  dymsjims/graphql:latest
-
+    - name: Push Docker image
+      run: |
+          docker push dymsjims/graphql:0.0.2
+          docker push dymsjims/graphql:latest
         
       
     
